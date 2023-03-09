@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Y Registro</title>
+
+</head>
+
+<body>
+
+<?php
+
+
+if (!empty($error)) {
+    echo "<p style='color: red'> $error</p>";
+}
+?>
+
+
+<h1>Logeo</h1>
+
+<form action="index.php?login" method="post">
+    <div class="form-group">
+        <label for="user">Nombre Usuario</label>
+        <input type="text" class="form-control" name="user" id="user" aria-describedby="emailHelp"
+               placeholder="Ingrese su nombre">
+
+    </div>
+    <div class="form-group">
+        <label for="exampleInputPassword1">Contraseña</label>
+        <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+    </div>
+    <br>
+    <input type="submit" name="logeo" class="btn btn-primary" value="Entrar"/>
+</form>
+
+<h1>Registro</h1>
+
+<form action="index.php?login" method="post">
+    <div class="form-group">
+        <label for="user">Usuario</label>
+        <input type="text" class="form-control" name="user" id="user" aria-describedby="emailHelp"
+               placeholder="Ingrese su nombre de usuario">
+    </div>
+
+    <div class="form-group">
+        <label for="firstname">Nombre</label>
+        <input type="text" class="form-control" name="firstname" id="firstname" aria-describedby="emailHelp"
+               placeholder="Ingrese su nombre">
+    </div>
+
+    <div class="form-group">
+        <label for="lastname">Apellidos</label>
+        <input type="text" class="form-control" name="lastname" id="lastname" aria-describedby="emailHelp"
+               placeholder="Ingrese su apellido">
+    </div>
+
+    <div class="form-group">
+        <label for="exampleInputPassword1">Contraseña</label>
+        <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+    </div>
+
+    <div class="form-group">
+        <label for="exampleInputPassword1">Repita su contraseña</label>
+        <input type="password" name="password2" class="form-control" id="exampleInputPassword1" placeholder="Password">
+    </div>
+
+    <div class="form-group">
+        <label for="dni">DNI</label>
+        <input type="text" class="form-control" name="dni" id="dni" aria-describedby="emailHelp"
+               placeholder="Ingrese su DNI">
+    </div>
+
+    <br>
+    <input type="submit" name="registro" class="btn btn-primary" value="Entrar"/>
+</form>
+
+
+<?php
+echo '<li><a href="index.php">Inicio</a></li>';
+
+?>
+
+</body>
+
+</html>

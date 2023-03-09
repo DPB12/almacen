@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <title>Gestion de almacen</title>
+</head>
+<body class="p-2 text-center">
+<?php
+if ($_SESSION['user']->getRol() == 0 || $_SESSION['user']->getRol() == 1){
+    echo "<a href='index.php?edit_objetos' class='mx-auto my-2'>Editar objetos</a>";  
+echo "<br><br>" ;
+
+
+    echo '<table id="example" class="table table-striped table-bordered" style="width:100%"><thead>
+              <tr>
+                  <th>Id</th>
+                  <th>Nombre</th>
+                  <th>Descricion</th>
+                  <th>Cantidad</th>                  
+                  <th>entrada</th>
+                  <th>Salida</th>
+
+              </tr>
+              </thead>';
+
+    foreach ($objetos as $objeto) {
+
+            echo '<tbody>
+                  <tr>
+                      <td>'.$objeto->getId().'</td>
+                      <td>'. $objeto->getNombre() .'</td>
+                      <td>'. $objeto->getDescripcion() .'</td>                      
+                      <td>'. $objeto->getCantidad() .'</td>
+                      <td>
+                      <form action="index.php?entrada='.$objeto->getId().'" method="POST">
+                      <input type="submit" name="entrada" value="'. $objeto->getEntrada() .'">
+                      </form>
+                      </td>
+                      <td> 
+                      <form action="index.php?salida='.$objeto->getId().'" method="POST">
+                      <input type="submit" name="salida" value="'. $objeto->getSalida() .'">
+                      </form>
+                      </td>
+
+                  </tr>
+                  </tbody>';
+
+
+    }
+    if(isset($_POST['entrada'])){    
+        echo "<h3>Entrar objeto alamacen</h3>";
+
+         foreach ($objetos as $objeto){
+             echo '<form action="index.php?edit_entrada='.$objeto->getId().'" method="POST" class="col-12 mx-auto my-2">
+                        <input type="hidden" name="id_entrada" value="'. $objeto->getId() .'">
+                     <label for="nombre">Nombre:</label>
+                        <input type="text" name="nombre" value="'. $objeto->getNombre() .'" readonly>
+                     <label for="cantidad">Cantidad:</label>
+                        <input type="number" name="cantidad" value="'. $objeto->getCantidad() .'" readonly>
+                     <label for="entrada">Entrada Objeto:</label>
+                        <input type="number" name="edit_entrada" value="0">
+                        <input type="submit" name="enviar" value="Enviar objeto">
+                   </form>';
+                   echo "<br>";
+         }
+         
+     }
+     
+     if(isset($_POST['salida'])){    
+         echo "<h3>Sacar objeto alamacen</h3>";
+     
+         foreach ($objetos as $objeto){
+             echo '<form action="index.php?edit_salida='.$objeto->getId().'" method="POST" class="col-12 mx-auto my-2">
+                        <input type="hidden" name="id_salida" value="'. $objeto->getId() .'">
+                     <label for="nombre">Nombre:</label>
+                        <input type="text" name="nombre" value="'. $objeto->getNombre() .'" readonly>
+                     <label for="cantidad">Cantidad:</label>
+                        <input type="number" name="cantidad" value="'. $objeto->getCantidad() .'" readonly>
+                     <label for="entrada">Salida Objeto:</label>
+                        <input type="number" name="edit_salida" value="0">
+                        <input type="submit" name="enviar" value="Sacar objeto">
+                   </form>';
+                   echo "<br>";
+         }
+     }
+    echo '</table>';
+
+
+
+echo '<ul class="nav">';
+echo '<li><a href="index.php">Inicio</a></li>';
+}
+if ($_SESSION['user']->getName() == "")
+{
+    echo '<li><a href="index.php?login">Login</a></li>';
+}
+else
+{
+    echo '<li><a href="index.php?login&logout">Salir</a></li>';
+}
+
+echo "</ul>";
+?>
+
+
+
+
+</body>
+</html>

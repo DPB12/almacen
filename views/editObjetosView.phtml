@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <title>Editar Usuarios</title>
+
+</head>
+<body>
+
+<?php
+
+echo '<div class="row text-center">';
+
+if (isset($errors)) echo "<h3 class='mx-auto my-2 text-danger'>$errors</h3>";
+else if (isset($msg)) echo "<h3 class='mx-auto my-2 text-info'>$msg</h3>";
+
+
+
+
+    foreach ($objetos as $objeto){
+    echo '<form action="index.php?edit_objeto='.$objeto->getId().'" method="POST" class="col-12 mx-auto my-2">
+               <input type="hidden" name="edit_objeto" value="'. $objeto->getId() .'">
+            <label for="nombre">Nombre:</label>
+               <input type="text" name="nombre" value="'. $objeto->getNombre() .'">
+            <label for="cantidad">Cantidad:</label>
+               <input type="number" name="cantidad" value="'. $objeto->getCantidad() .'">
+            <label for="descripcion">Descripcion:</label>    
+               <input type="text" name="descripcion"  value="'. $objeto->getDescripcion() .'">
+            <label for="ubicacio">Ubicacion:</label>
+               <input type="text" name="ubicacion"  value="'. $objeto->getUbicacion() .'">
+            <label for="entrada">Entrada Objeto:</label>
+               <input type="submit" name="entrada" value="'. $objeto->getEntrada() .'">
+            <label for="salida">Salida Objeto:</label>
+               <input type="submit" name="salida" value="'. $objeto->getSalida() .'">
+               <input type="submit" name="enviar" value="Enviar objeto">
+          </form>';
+}
+
+if(isset($_POST['entrada'])){    
+   echo "<h3>Entrar objeto alamacen</h3>";
+    foreach ($objetos as $objeto){
+        echo '<form action="index.php?edit_entrada='.$objeto->getId().'" method="POST" class="col-12 mx-auto my-2">
+                   <input type="hidden" name="id_entrada" value="'. $objeto->getId() .'">
+                <label for="nombre">Nombre:</label>
+                   <input type="text" name="nombre" value="'. $objeto->getNombre() .'" readonly>
+                <label for="cantidad">Cantidad:</label>
+                   <input type="number" name="cantidad" value="'. $objeto->getCantidad() .'" readonly>
+                <label for="entrada">Entrada Objeto:</label>
+                   <input type="number" name="edit_entrada" value="0">
+                   <input type="submit" name="enviar" value="Enviar objeto">
+              </form>';
+    }
+}
+
+if(isset($_POST['salida'])){    
+    echo "<h3>Sacar objeto alamacen</h3>";
+
+    foreach ($objetos as $objeto){
+        echo '<form action="index.php?edit_salida='.$objeto->getId().'" method="POST" class="col-12 mx-auto my-2">
+                   <input type="hidden" name="id_salida" value="'. $objeto->getId() .'">
+                <label for="nombre">Nombre:</label>
+                   <input type="text" name="nombre" value="'. $objeto->getNombre() .'" readonly>
+                <label for="cantidad">Cantidad:</label>
+                   <input type="number" name="cantidad" value="'. $objeto->getCantidad() .'" readonly>
+                <label for="entrada">Salida Objeto:</label>
+                   <input type="number" name="edit_salida" value="0">
+                   <input type="submit" name="enviar" value="Sacar objeto">
+              </form>';
+    }
+}
+
+
+echo "<a href='index.php' class='mx-auto my-2'>Volver</a>";
+
+echo '</div>';
+
+?>
+
+<h1>Añadir Elemento</h1>
+
+<form action="index.php?add" method="post">
+    <div class="form-group">
+        <label for="nombre">nombre</label>
+        <input type="text" class="form-control" name="nombre" id="nombre" aria-describedby="emailHelp"
+              >
+    </div>
+
+    <div class="form-group">
+        <label for="desripcion">desripcion</label>
+        <input type="text" class="form-control" name="descripcion" id="descripcion" aria-describedby="emailHelp"
+              >
+    </div>
+
+    <div class="form-group">
+        <label for="ubicacion">ubicacion</label>
+        <input type="text" class="form-control" name="ubicacion" id="ubicacion" aria-describedby="emailHelp">
+    </div>
+
+    <div class="form-group">
+        <label for="cantidad">cantidad</label>
+        <input type="number" name="cantidad" class="form-control" id="cantidad" >
+    </div>
+
+    <br>
+    <input type="submit" name="add" class="btn btn-primary" value="Registrar Objeto"/>
+</form>
+
+
+</body>
+</html>
